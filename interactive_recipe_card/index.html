@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="TastyBite interactive multi-recipe website"
+  >
+
+  <title>TastyBite | Interactive Recipe Website</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS -->
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+<body>
+
+  <!-- =========================================
+       NAVBAR
+  ========================================== -->
+
+  <header class="navbar">
+
+    <div class="nav-container">
+
+      <a
+        href="#home"
+        class="logo"
+      >
+        <span class="logo-icon">
+          🍴
+        </span>
+
+        <span>
+          Tasty<span class="logo-highlight">Bite</span>
+        </span>
+      </a>
+
+
+      <nav
+        class="nav-links"
+        id="navLinks"
+      >
+        <a href="#home">
+          Home
+        </a>
+
+        <a href="#recipes">
+          Recipes
+        </a>
+
+        <a href="#about">
+          About
+        </a>
+      </nav>
+
+
+      <div class="nav-actions">
+
+        <button
+          class="nav-icon-button"
+          id="favoriteNavBtn"
+          type="button"
+          aria-label="Open favorites"
+        >
+          ♡
+
+          <span id="favoriteCount">
+            0
+          </span>
+        </button>
+
+
+        <button
+          class="menu-button"
+          id="menuBtn"
+          type="button"
+          aria-label="Open navigation menu"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================
+       HERO
+  ========================================== -->
+
+  <main>
+
+    <section
+      class="hero"
+      id="home"
+    >
+
+      <div class="hero-decoration hero-decoration-one"></div>
+      <div class="hero-decoration hero-decoration-two"></div>
+
+
+      <div class="hero-content">
+
+        <span class="hero-badge">
+          ✨ Discover. Cook. Enjoy.
+        </span>
+
+
+        <h1>
+          Delicious recipes for
+          <span>every moment</span>
+        </h1>
+
+
+        <p>
+          Explore easy, delicious and interactive recipes.
+          Search your favourite dishes, follow step-by-step
+          instructions and enjoy cooking at home.
+        </p>
+
+
+        <div class="hero-search">
+
+          <span class="search-icon">
+            🔍
+          </span>
+
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search recipes, categories or ingredients..."
+            autocomplete="off"
+          >
+
+          <button
+            id="searchBtn"
+            type="button"
+          >
+            Search
+          </button>
+
+        </div>
+
+
+        <div class="hero-stats">
+
+          <div>
+            <strong>8+</strong>
+            <span>Recipes</span>
+          </div>
+
+          <div>
+            <strong>6+</strong>
+            <span>Categories</span>
+          </div>
+
+          <div>
+            <strong>100%</strong>
+            <span>Homemade</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CATEGORIES
+    ========================================== -->
+
+    <section class="categories-section">
+
+      <div class="section-container">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-label">
+              EXPLORE
+            </span>
+
+            <h2>
+              Browse by category
+            </h2>
+          </div>
+
+          <p>
+            Find the perfect recipe for every craving.
+          </p>
+
+        </div>
+
+
+        <div class="category-buttons">
+
+          <button
+            class="category-btn active"
+            data-category="All"
+            type="button"
+          >
+            🍽️ All Recipes
+          </button>
+
+          <button
+            class="category-btn"
+            data-category="Breakfast"
+            type="button"
+          >
+            🥞 Breakfast
+          </button>
+
+          <button
+            class="category-btn"
+            data-category="Main Course"
+            type="button"
+          >
+            🍛 Main Course
+          </button>
+
+          <button
+            class="category-btn"
+            data-category="Dessert"
+            type="button"
+          >
+            🍰 Dessert
+          </button>
+
+          <button
+            class="category-btn"
+            data-category="Italian"
+            type="button"
+          >
+            🍝 Italian
+          </button>
+
+          <button
+            class="category-btn"
+            data-category="Chinese"
+            type="button"
+          >
+            🍜 Chinese
+          </button>
+
+          <button
+            class="category-btn"
+            data-category="Fast Food"
+            type="button"
+          >
+            🍕 Fast Food
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         RECIPES
+    ========================================== -->
+
+    <section
+      class="recipes-section"
+      id="recipes"
+    >
+
+      <div class="section-container">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-label">
+              OUR COLLECTION
+            </span>
+
+            <h2>
+              Popular recipes
+            </h2>
+          </div>
+
+          <p id="recipeResultText">
+            Showing 8 recipes
+          </p>
+
+        </div>
+
+
+        <!-- JavaScript inserts cards here -->
+        <div
+          class="recipe-grid"
+          id="recipeGrid"
+        ></div>
+
+
+        <!-- Empty Search State -->
+        <div
+          class="empty-state hidden"
+          id="emptyState"
+        >
+
+          <span>
+            🔍
+          </span>
+
+          <h3>
+            No recipes found
+          </h3>
+
+          <p>
+            Try another search term or category.
+          </p>
+
+          <button
+            id="clearSearchBtn"
+            type="button"
+          >
+            Show All Recipes
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ABOUT
+    ========================================== -->
+
+    <section
+      class="about-section"
+      id="about"
+    >
+
+      <div class="section-container about-grid">
+
+        <div class="about-visual">
+
+          <div class="about-emoji">
+            👩‍🍳
+          </div>
+
+          <div class="floating-card floating-one">
+            <span>⭐</span>
+            Easy Recipes
+          </div>
+
+          <div class="floating-card floating-two">
+            <span>❤️</span>
+            Made with Love
+          </div>
+
+        </div>
+
+
+        <div class="about-content">
+
+          <span class="section-label">
+            ABOUT TASTYBITE
+          </span>
+
+          <h2>
+            Cooking made simple, fun and interactive
+          </h2>
+
+          <p>
+            TastyBite is an interactive recipe website
+            designed to make home cooking easier and more
+            enjoyable.
+          </p>
+
+          <p>
+            Explore recipes, check ingredients, follow
+            animated cooking steps, track your progress
+            and use a built-in cooking timer.
+          </p>
+
+
+          <div class="about-features">
+
+            <div>
+              <span>✓</span>
+              Step-by-step guidance
+            </div>
+
+            <div>
+              <span>✓</span>
+              Responsive design
+            </div>
+
+            <div>
+              <span>✓</span>
+              Cooking timer
+            </div>
+
+            <div>
+              <span>✓</span>
+              Favourite recipes
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       RECIPE MODAL
+  ========================================== -->
+
+  <div
+    class="modal-overlay hidden"
+    id="recipeModal"
+  >
+
+    <article class="recipe-modal">
+
+      <button
+        class="close-modal-button"
+        id="closeModalBtn"
+        type="button"
+        aria-label="Close recipe"
+      >
+        ×
+      </button>
+
+
+      <div class="modal-image-wrapper">
+
+        <img
+          id="modalImage"
+          src=""
+          alt="Recipe"
+        >
+
+        <div class="modal-image-overlay">
+
+          <span
+            class="modal-category"
+            id="modalCategory"
+          >
+            Category
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-content">
+
+        <div class="modal-title-row">
+
+          <h2 id="modalTitle">
+            Recipe Name
+          </h2>
+
+          <button
+            class="modal-favorite-button"
+            id="modalFavoriteBtn"
+            type="button"
+            aria-label="Add recipe to favorites"
+          >
+            ♡
+          </button>
+
+        </div>
+
+
+        <p
+          class="modal-description"
+          id="modalDescription"
+        >
+          Recipe description.
+        </p>
+
+
+        <!-- Recipe Information -->
+
+        <div class="modal-info-grid">
+
+          <div class="modal-info-card">
+            <span>⏱️</span>
+
+            <div>
+              <small>Cooking Time</small>
+
+              <strong id="modalTime">
+                0 min
+              </strong>
+            </div>
+          </div>
+
+
+          <div class="modal-info-card">
+            <span>🍽️</span>
+
+            <div>
+              <small>Servings</small>
+
+              <strong id="modalServings">
+                0 People
+              </strong>
+            </div>
+          </div>
+
+
+          <div class="modal-info-card">
+            <span>⭐</span>
+
+            <div>
+              <small>Difficulty</small>
+
+              <strong id="modalDifficulty">
+                Easy
+              </strong>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Ingredients -->
+
+        <section class="modal-section">
+
+          <div class="modal-section-heading">
+
+            <h3>
+              🥗 Ingredients
+            </h3>
+
+            <button
+              class="outline-button"
+              id="toggleIngredientsBtn"
+              type="button"
+            >
+              Hide Ingredients
+            </button>
+
+          </div>
+
+
+          <ul
+            class="modal-ingredients"
+            id="modalIngredients"
+          ></ul>
+
+        </section>
+
+
+        <!-- Instructions -->
+
+        <section class="modal-section">
+
+          <div class="modal-section-heading">
+
+            <h3>
+              👨‍🍳 Cooking Instructions
+            </h3>
+
+            <span
+              class="modal-step-counter"
+              id="modalStepCounter"
+            >
+              Step 1 of 6
+            </span>
+
+          </div>
+
+
+          <!-- Progress -->
+
+          <div class="modal-progress-info">
+
+            <span>
+              Your Progress
+            </span>
+
+            <span id="modalProgressText">
+              0%
+            </span>
+
+          </div>
+
+
+          <div class="modal-progress-track">
+
+            <div
+              class="modal-progress-bar"
+              id="modalProgressBar"
+            ></div>
+
+          </div>
+
+
+          <!-- Steps -->
+
+          <ol
+            class="modal-steps"
+            id="modalSteps"
+          ></ol>
+
+
+          <!-- Controls -->
+
+          <div class="modal-controls">
+
+            <button
+              class="start-cooking-button"
+              id="startCookingBtn"
+              type="button"
+            >
+              ▶ Start Cooking
+            </button>
+
+            <button
+              class="next-step-button"
+              id="nextStepBtn"
+              type="button"
+            >
+              Next Step →
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- Timer -->
+
+        <div class="cooking-timer">
+
+          <div class="timer-left">
+
+            <div class="timer-icon">
+              ⏱️
+            </div>
+
+            <div>
+              <small>
+                COOKING TIMER
+              </small>
+
+              <strong id="timerDisplay">
+                00:00
+              </strong>
+            </div>
+
+          </div>
+
+
+          <button
+            id="resetTimerBtn"
+            type="button"
+          >
+            Reset Timer
+          </button>
+
+        </div>
+
+
+        <!-- Complete Message -->
+
+        <div
+          class="complete-message hidden"
+          id="completeMessage"
+        >
+
+          <span>
+            🎉
+          </span>
+
+          <h3>
+            Recipe Completed!
+          </h3>
+
+          <p>
+            Wonderful! Your delicious dish is ready to enjoy.
+          </p>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <!-- =========================================
+       FAVORITES PANEL
+  ========================================== -->
+
+  <aside
+    class="favorites-panel"
+    id="favoritesPanel"
+  >
+
+    <div class="favorites-header">
+
+      <div>
+        <span class="section-label">
+          SAVED
+        </span>
+
+        <h3>
+          My Favorites
+        </h3>
+      </div>
+
+
+      <button
+        id="closeFavoritesBtn"
+        type="button"
+        aria-label="Close favorites"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="favorites-list"
+      id="favoritesList"
+    ></div>
+
+  </aside>
+
+
+  <div
+    class="panel-backdrop hidden"
+    id="panelBackdrop"
+  ></div>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer class="footer">
+
+    <div class="footer-container">
+
+      <div>
+
+        <div class="logo footer-logo">
+
+          <span class="logo-icon">
+            🍴
+          </span>
+
+          <span>
+            Tasty<span class="logo-highlight">Bite</span>
+          </span>
+
+        </div>
+
+        <p>
+          Delicious recipes made simple and interactive.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="#home">
+          Home
+        </a>
+
+        <a href="#recipes">
+          Recipes
+        </a>
+
+        <a href="#about">
+          About
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 TastyBite
+      </span>
+
+      <span>
+        Made with ❤️ for food lovers
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
